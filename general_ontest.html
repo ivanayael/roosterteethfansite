@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Channels and Playlists</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin: 20px 0;
+    }
+    .container {
+      display: flex;
+      width: 90%;
+      margin-top: 20px;
+    }
+    .menu {
+      flex: 1;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    .menu li {
+      margin: 10px 0;
+    }
+    .content {
+      flex: 2;
+      padding: 20px;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+    p.description {
+      margin-top: 15px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Channels and Playlists</h1>
+  <div class="container">
+    <div class="menu">
+      <ul>
+        <li><a href="#" onclick="loadChannelPlaylists('roosterteeth')">Rooster Teeth</a></li>
+        <li><a href="#" onclick="loadChannelPlaylists('achievementhunter')">Achievement Hunter</a></li>
+        <li><a href="#" onclick="loadChannelPlaylists('funhaus')">Funhaus</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <div id="playlists">
+        <ul>
+          <!-- Playlists will be dynamically loaded here -->
+        </ul>
+      </div>
+      <iframe id="playlistFrame" src="" allowfullscreen></iframe>
+      <p id="playlistDescription" class="description">Select a playlist to see its description here.</p>
+    </div>
+  </div>
+
+  <script>
+    const channels = {
+      roosterteeth: [
+        { id: 'PLUBVPK8x-XMjKAxGCwhQ2WxTvfqX8qRku', name: 'Rooster Teeth Podcast', description: 'Weekly discussions about trending topics, games, and behind-the-scenes insights.' },
+        { id: 'PLUBVPK8x-XMhHlJ8FTPULD0FPr4xlEIhU', name: 'Red vs. Blue - Season 17', description: 'The latest season of the epic machinima series.' }
+      ],
+      achievementhunter: [
+        { id: 'PLUBVPK8x-XMi2xAOf9jM4RhD5K0F6xWcH', name: 'Let\'s Play Minecraft', description: 'A fun Minecraft series with the Achievement Hunter crew.' },
+        { id: 'PLUBVPK8x-XMgMimlVzqE-tOkY40gf2X6E', name: 'Achievement Hunter Shorts', description: 'Short and hilarious videos by Achievement Hunter.' }
+      ],
+      funhaus: [
+        { id: 'PLUBVPK8x-XMjWtKuXOVaXECXGFR7yWjVh', name: 'Funhaus Gameplay', description: 'Gameplay and comedy from the Funhaus team.' },
+        { id: 'PLUBVPK8x-XMhJLvFf5FpyUBoMOrq-T8Tx', name: 'Dude Soup Podcast', description: 'Weekly gaming and entertainment discussions.' }
+      ]
+    };
+
+    function loadChannelPlaylists(channel) {
+      const playlistsElement = document.getElementById('playlists').querySelector('ul');
+      playlistsElement.innerHTML = ''; // Clear existing playlists
+      channels[channel].forEach(playlist => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = playlist.name;
+        link.onclick = () => loadPlaylist(playlist.id, playlist.description);
+        li.appendChild(link);
+        playlistsElement.appendChild(li);
+      });
+    }
+
+    function loadPlaylist(playlistId, description) {
+      const iframe = document.getElementById('playlistFrame');
+      const descriptionElement = document.getElementById('playlistDescription');
+      iframe.src = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+      descriptionElement.textContent = description;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rooster Teeth Playlists</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="https://yt3.googleusercontent.com/JKtpGoZ_0szdlbqIjQJiBRSl27sh-eLkCazBHz6MW8XYJ1I8QhppsOUX1t19ujbBdlEZQKU5Kg=s160-c-k-c0x00ffffff-no-rj" alt="Rooster Teeth Logo" style="height: 50px;">
+        <h1>Rooster Teeth Fan Site</h1>
+    </header>
+  <main>
+    
+    <div class="playlist-list">
+      <ul>
+        <li><a href="#podcast" onclick="loadPlaylist('PLUBVPK8x-XMjKAxGCwhQ2WxTvfqX8qRku', 'The Rooster Teeth Podcast includes weekly discussions about trending topics, games, and behind-the-scenes insights.')">Rooster Teeth Podcast</a></li>
+        <li><a href="#rt-podcast" onclick="loadPlaylist('PLUBVPK8x-XMjKWQDYMY-m5USZyXoIorap', 'The best of RT Podcast 2023')">RT Podcast 2023</a></li>
+        <li><a href="#animated-adventures" onclick="loadPlaylist('PLUBVPK8x-XMiSedTI8LNGw19I7lLpWkCx', '')">Animated Adventures 2023</a></li>
+        <li><a href="#get-fact" onclick="loadPlaylist('PLUBVPK8x-XMiddGvvb5Oebn-t9dbeiBR9')">Get Fact</a></li>
+        <li><a href="#achivementhunter" onclick="loadPlaylist('PLUBVPK8x-XMhfonDuYH8YY5hsaelh8OX_')">Always Open Season 2</a></li>
+      </ul>
+    </div>
+    <div class="playlist-display">
+      <!-- Default playlist (Rooster Teeth Podcast) -->
+      <iframe id="playlistFrame" 
+        title="Rooster Teeth Playlist"
+        src="https://www.youtube.com/embed/videoseries?list=PLUBVPK8x-XMjKAxGCwhQ2WxTvfqX8qRku" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="content">
+        <iframe id="playlistFrame" title="Playlist Display" src="" allowfullscreen></iframe>
+        <p id="playlistDescription" class="description">Select a playlist to see its description here.</p>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 Rooster Teeth Fan Project - Made by <a href="https://www.ivanayaelcurra.com.ar">Ivana Yael Currá></a>- Work On Progress - First MVP 12/27/2024</p>
+  </footer>
+  <script>
+    function loadPlaylist(playlistId) {
+      const iframe = document.getElementById('playlistFrame');
+      const descriptionElement = document.getElementById('playlistDescription');
+      iframe.src = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+      descriptionElement.textContent = description;
+    }
+  </script>
+</body>
+</html>
