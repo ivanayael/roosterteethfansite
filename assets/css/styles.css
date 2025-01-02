@@ -110,9 +110,14 @@ body {
     transform: scale(1.05);
     border-color: #ff0000;
   }
-
-
-
+  
+  .dinosaurio{
+    width: 10%;
+    height: 10%;
+    border-radius: 5px;
+    margin: 0 auto;
+  }
+}
 
 
 

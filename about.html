@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argentinosaurio en el Valle de la Luna</title>
+    <link rel="stylesheet" href="assets/css/styles.css"> 
     <style>
         canvas {
             display: block;
@@ -13,7 +14,9 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Argentinosaurio en el Valle de la Luna</h1>
+    <h1 style="text-align: center;">The Dinasour Is Alive! Save the Baby Argentinosaurio in the Moon Valley</h1>
+    
+    <img class="dinosaurio" src="assets/img/DALL·E 2025-01-02 18.15.37 - A simple cartoon style image of a long-necked green dinosaur standing on the ground. The dinosaur has a large body and a long neck, with a small circu.webp" alt="El dinosaurio argentinosaurus esta vivo!">
     <canvas id="gameCanvas" width="800" height="400"></canvas>
 
     <script>
@@ -89,7 +92,7 @@
                     dinosaurio.y < piedra.y + piedra.height &&
                     dinosaurio.y + dinosaurio.height > piedra.y
                 ) {
-                    alert(`¡Perdiste! Puntuación: ${puntuacion}`);
+                    alert(`¡You Lost! Points: ${puntuacion}`);
                     document.location.reload();
                 }
 
@@ -110,7 +113,7 @@
         function dibujarPuntuacion() {
             ctx.fillStyle = "black";
             ctx.font = "20px Arial";
-            ctx.fillText(`Puntuación: ${puntuacion}`, 10, 20);
+            ctx.fillText(`Points: ${puntuacion}`, 10, 20);
         }
 
         // Bucle principal
