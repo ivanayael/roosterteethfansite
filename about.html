@@ -1,23 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rooster Teeth Playlists</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentinosaurio en el Valle de la Luna</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, #87CEEB, #D3D3D3);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="https://yt3.googleusercontent.com/JKtpGoZ_0szdlbqIjQJiBRSl27sh-eLkCazBHz6MW8XYJ1I8QhppsOUX1t19ujbBdlEZQKU5Kg=s160-c-k-c0x00ffffff-no-rj" alt="Rooster Teeth Logo">
-        <h1>Rooster Teeth Fan Site</h1>
-    </header>
-  <main>
-    <h1>Hey there, you have stumbled upon our random corner of the internet! Rooster Teeth here, keeping ourselves endlessly entertained since 2003. Whether we're diving into Dungeons and Dragons, gaming, or getting grossed out by fast food freakshows, we never fail to crack ourselves up. And guess what? Our wild passions have led us to create all sorts of awesome stuff across gaming, comedy, animation, and podcasts. </h2>
- 
-  </main>
-  <footer>
-    <p>&copy; 2024 Rooster Teeth Fan Project</p>
-  </footer>
- 
+    <h1 style="text-align: center;">Argentinosaurio en el Valle de la Luna</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Variables del juego
+        let dinosaurio = { x: 50, y: 300, width: 50, height: 50, vy: 0, jumping: false };
+        let piedras = [];
+        let gravedad = 0.8;
+        let velocidad = 5;
+        let puntuacion = 0;
+
+        // Eventos del teclado
+        document.addEventListener("keydown", () => {
+            if (!dinosaurio.jumping) {
+                dinosaurio.jumping = true;
+                dinosaurio.vy = -15;
+            }
+        });
+
+        // Función para generar piedras
+        function generarPiedra() {
+            piedras.push({ x: canvas.width, y: 330, width: 40, height: 40 });
+        }
+
+        // Dibujar dinosaurio
+        function dibujarDinosaurio() {
+            ctx.fillStyle = "green";
+
+
+     
+            // Cuerpo
+            ctx.fillRect(dinosaurio.x, dinosaurio.y + 20, dinosaurio.width, dinosaurio.height - 20);
+            // Cuello
+            ctx.fillRect(dinosaurio.x + dinosaurio.width - 10, dinosaurio.y - 40, 10, 60);
+         
+            //Cabeza
+            ctx.beginPath();
+            ctx.arc(dinosaurio.x + dinosaurio.width, dinosaurio.y - 40, 15, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+
+
+        // Dibujar piedras
+        function dibujarPiedras() {
+            ctx.fillStyle = "brown";
+            piedras.forEach((piedra) => {
+                ctx.fillRect(piedra.x, piedra.y, piedra.width, piedra.height);
+            });
+        }
+
+        // Actualizar estado del juego
+        function actualizarJuego() {
+            // Dinosaurio
+            dinosaurio.vy += gravedad;
+            dinosaurio.y += dinosaurio.vy;
+
+            if (dinosaurio.y >= 300) {
+                dinosaurio.y = 300;
+                dinosaurio.jumping = false;
+            }
+
+            // Piedras
+            piedras.forEach((piedra, index) => {
+                piedra.x -= velocidad;
+
+                // Colisión
+                if (
+                    dinosaurio.x < piedra.x + piedra.width &&
+                    dinosaurio.x + dinosaurio.width > piedra.x &&
+                    dinosaurio.y < piedra.y + piedra.height &&
+                    dinosaurio.y + dinosaurio.height > piedra.y
+                ) {
+                    alert(`¡Perdiste! Puntuación: ${puntuacion}`);
+                    document.location.reload();
+                }
+
+                // Eliminar piedras fuera del canvas
+                if (piedra.x + piedra.width < 0) {
+                    piedras.splice(index, 1);
+                    puntuacion++;
+                }
+            });
+
+            // Generar nuevas piedras
+            if (Math.random() < 0.02) {
+                generarPiedra();
+            }
+        }
+
+        // Dibujar puntuación
+        function dibujarPuntuacion() {
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText(`Puntuación: ${puntuacion}`, 10, 20);
+        }
+
+        // Bucle principal
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            dibujarDinosaurio();
+            dibujarPiedras();
+            dibujarPuntuacion();
+            actualizarJuego();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Iniciar el juego
+        gameLoop();
+    </script>
 </body>
 </html>
